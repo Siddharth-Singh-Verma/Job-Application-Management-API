@@ -12,9 +12,14 @@ class JobSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class ApplicationSerializer(serializers.ModelSerializer):
+    applicant = ApplicantSerializer(read_only=True)
+    job = JobSerializer(read_only=True)
+    applicant_id = serializers.PrimaryKeyRelatedField(queryset=Applicant.objects.all(), write_only=True, source='applicant')
+    job_id = serializers.PrimaryKeyRelatedField(queryset=Job.objects.all(), write_only=True, source='job')
+
     class Meta:
         model = Application
-        fields = '__all__'
+        fields = ['id', 'applicant', 'job', 'status', 'applied_on', 'applicant_id', 'job_id']
 
     def validate(self, data):
         applicant = data.get('applicant')
