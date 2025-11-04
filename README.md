@@ -1,7 +1,7 @@
 # Job Application Management API
 
 A simple Django REST Framework API for managing job applications, applicants, and jobs.
-
+[Demo Video](https://drive.google.com/file/d/1bCj4mVHoV7_BcYu62KSJQhOz-yz0YTAu/view?usp=sharing)
 ## Setup Instructions
 
 1. **Clone the repository**
