@@ -11,9 +11,19 @@ class JobSerializer(serializers.ModelSerializer):
         model = Job
         fields = '__all__'
 
+class ApplicantNestedSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Applicant
+        fields = ['id', 'name', 'email']
+
+class JobNestedSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Job
+        fields = ['id', 'title']
+
 class ApplicationSerializer(serializers.ModelSerializer):
-    applicant = ApplicantSerializer(read_only=True)
-    job = JobSerializer(read_only=True)
+    applicant = ApplicantNestedSerializer(read_only=True)
+    job = JobNestedSerializer(read_only=True)
     applicant_id = serializers.PrimaryKeyRelatedField(queryset=Applicant.objects.all(), write_only=True, source='applicant')
     job_id = serializers.PrimaryKeyRelatedField(queryset=Job.objects.all(), write_only=True, source='job')
 
